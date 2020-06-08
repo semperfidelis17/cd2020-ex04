@@ -1,0 +1,12 @@
+services:
+    - docker
+
+script:
+    - go tesst -v ./...
+    - CGO_ENABLED=0 go build -o demo
+    - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
+    - docker build -f Dockerfile -t semperfidelis17/demo:latest ./
+    - GIT_SHA="$(git rev-parse --short HEAD)"
+    - docker tag semperfidelis17/demo:latest semperfidelis17/demo:$GIT_SHA
+    - docker push semperfidelis17/demo:latest
+    - docker push semperfidelis17/demo:$GIT_SHA
