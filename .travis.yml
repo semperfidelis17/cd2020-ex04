@@ -2,7 +2,7 @@ services:
     - docker
 
 script:
-    - go tesst -v ./...
+    - go test -v ./...
     - CGO_ENABLED=0 go build -o demo
     - echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
     - docker build -f Dockerfile -t semperfidelis17/demo:latest ./
