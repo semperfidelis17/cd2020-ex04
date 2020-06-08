@@ -10,6 +10,7 @@ import (
 func handler(w http.ResponseWriter, r *http.Request) {
 	t := time.Now()
 	fmt.Fprintf(w, "Hello, it is %d:%d", t.Hour(), getMinute(t.Minute(), t.Second()))
+	fmt.Fprintf(w, "This is a change to Trigger Travis.")
 }
 
 func getMinute(minute int, second int) int {
